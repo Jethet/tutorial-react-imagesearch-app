@@ -1,30 +1,35 @@
 import React from "react";
+import ImageSearch from "./ImageSearch/ImageSearch";
+import ImageList from "./ImageList/ImageList";
+
 require("dotenv").config();
 
 const API_KEY = process.env.REACT_APP_API_KEY;
-const url = `https://pixabay.com/api/?key=${API_KEY}&q=yellow+flowers&image_type=photo`;
 
 class App extends React.Component {
   state = {
     images: []
-  }
+  };
 
-  handleGetRequest = async () => {
-    const request = await fetch(url)
-    const response = await request.json()
-    this.setState({images: response.hits})
+  handleGetRequest = async e => {
+    e.preventDefault();
+    const searchTerm = e.target.elements.searchValue.value;
+    const url = `https://pixabay.com/api/?key=${API_KEY}&q=${searchTerm}&image_type=photo`;
+    const request = await fetch(url);
+    const response = await request.json();
+    this.setState({ images: response.hits });
+    console.log(searchTerm);
+
     console.log(this.state.images);
-    
-  }
-
-  componentDidMount() {
-    this.handleGetRequest() // this keyword refers to the App component due to use of arrow function
-  }
+  };
 
   render() {
     return (
-    <div>App Component</div>
-    )
+      <div>
+        <ImageSearch handleGetRequest={this.handleGetRequest} />
+        <ImageList images={this.state.images}/>
+      </div>
+    );
   }
 }
 

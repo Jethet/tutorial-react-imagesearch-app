@@ -1,3 +1,5 @@
 {
-    "editor.suggestLineHeight": 50
+    "editor.lineHeight": 25,
+    "editor.tabSize": 2,
+    "editor.detectIndentation": false
 }
