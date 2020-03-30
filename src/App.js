@@ -5,9 +5,16 @@ const API_KEY = process.env.REACT_APP_API_KEY;
 const url = `https://pixabay.com/api/?key=${API_KEY}&q=yellow+flowers&image_type=photo`;
 
 class App extends React.Component {
+  state = {
+    images: []
+  }
 
-  handleGetRequest = () => {
-    console.log('working')
+  handleGetRequest = async () => {
+    const request = await fetch(url)
+    const response = await request.json()
+    this.setState({images: response.hits})
+    console.log(this.state.images);
+    
   }
 
   componentDidMount() {
