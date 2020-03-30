@@ -2,6 +2,8 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 
+import "./ImageViews.css"
+
 const ImageView = props => {
   //via the props argument we have access to all state data
   console.log(props.location.state.image);
